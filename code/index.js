@@ -1,3 +1,5 @@
+const { prefix, token } = require('./config.json');
+
 const fs = require('fs');
 const Discord = require('discord.js');
 const Canvas = require('canvas');
@@ -19,8 +21,6 @@ const antiSpam = new AntiSpam({
     ignoredUsers: [], // Array of User IDs that get ignored.
     // And many more options... See the documentation.
 });
-
-const { prefix, token } = require('./config.json');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -99,7 +99,7 @@ client.on("guildMemberAdd", async member => {
   ctx.font = "28px sans-serif"
   ctx.fillStyle = "#ffffff"
   ctx.fillText(
-    `Bienvenue sur Devior • Support,`,
+    `Bienvenue sur le serveur,`,
     canvas.width / 2.5,
     canvas.height / 3.5
   )
@@ -193,11 +193,11 @@ client.on("guildCreate", server => {
   server.owner.send(embed);
 });
 
-antiSpam.on("banAdd", (member) => console.log(`${member.user.tag} has been banned.`));
-
 antiSpam.on("error", (message, error, type) => {
 	console.log(`${message.author.tag} couldn't receive the sanction '${type}', error: ${error}`);
 });
+
+antiSpam.on("banAdd", (member) => console.log(`${member.user.tag} has been banned.`));
 
 antiSpam.on("kickAdd", (member) => console.log(`${member.user.tag} has been kicked.`));
 
