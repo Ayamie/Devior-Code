@@ -9,6 +9,7 @@ module.exports = {
         
         if (!message.mentions.users.size) {
             const avatar1Embed = new Discord.MessageEmbed()
+            .setColor('#2F3136')
             .setTitle("Ton avatar")
             .setImage(`${message.author.displayAvatarURL({ format: `png` })}`)
             return message.channel.send(avatar1Embed);
@@ -16,6 +17,7 @@ module.exports = {
 
         const avatarList = message.mentions.users.map(user => {
             const avatar2Embed = new Discord.MessageEmbed()
+            .setColor('#2F3136')
             .setTitle(`L'avatar de ${user.tag}`)
             .setImage(`${user.displayAvatarURL({ format: `png` })}`)
           return message.channel.send(avatar2Embed)
