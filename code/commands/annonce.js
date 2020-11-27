@@ -4,11 +4,11 @@ module.exports = {
     name: 'annonce',
     description: 'Make an annonce.',
     execute(message) {
+        message.channel.bulkDelete(1)
         if (message.member.hasPermission('ADMINISTRATOR')) {
         let msgArray = message.content.split(' ');
         msgArray.shift();
         const annonce = msgArray.join(' '); //contenu de l'annonce
-        message.channel.bulkDelete(1)
         const annonceEmbed = new Discord.MessageEmbed()
             .setColor('RED')
             .setTitle('Annonce')
