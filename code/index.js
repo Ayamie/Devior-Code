@@ -32,18 +32,18 @@ for (const file of commandFiles) {
   client.commands.set(command.name, command);
 }
 
-const activities_list = [
-  `d.help | Donne la liste de toute les commandes`,
-  `Apprenez à faire votre bot discord avec moi.`,
-  `Je suis dans ${client.guilds.cache.size} serveurs`
-]
-
 client.on('ready', () => {
+  const activities_list = [
+    `d.help | Donne la liste de toute les commandes`,
+    `Apprenez à faire votre bot discord avec moi.`,
+    `Je suis dans ${client.guilds.cache.size} serveurs`,
+    `avec ${client.guilds.cache.map(g => g.memberCount).reduce((a, b) => a + b)} utilisateurs`
+  ]
   console.log(`Logged in as ${client.user.tag}!`);
   setInterval(() => {
     const index = Math.floor(Math.random() * (activities_list.length - 1) + 1);
     client.user.setActivity(activities_list[index]);
-  }, 10000);  
+  }, 5000);  
 });
 
 client.on('message', message => {
@@ -130,6 +130,7 @@ client.on("guildMemberAdd", async member => {
 
   channel.send(`Bienvenue sur Devior • Support, ${member}!`, attachment)
   member.roles.add(member.guild.roles.cache.find(role => role.id === '770254394935345172'))
+  member.setNickname(`• ${member.user.username} •`)
 });
 
 client.on("guildMemberRemove", async member => {
